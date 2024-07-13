@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>io.github.softlyl</groupId>
 	<artifactId>mybatis-print-sql</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.2</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Spring集成mybatis自定义日志级别打印拼接好的直接可在sql客户端运行的sql</description>
 	<url>https://github.com/softlyl/mybatis-print-sql</url>
@@ -25,15 +25,15 @@
 		<developer>
 			<name>softlyl</name>
 			<email>790387838@qq.com</email>
-			<organization>Sonatype</organization>
-			<organizationUrl>http://www.sonatype.com</organizationUrl>
+			<url>https://github.com/softlyl</url>
+			<timezone>+8</timezone>
 		</developer>
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/simpligility/ossrh-demo.git</connection>
-		<developerConnection>scm:git:ssh://github.com:simpligility/ossrh-demo.git</developerConnection>
-		<url>http://github.com/simpligility/ossrh-demo/tree/master</url>
+		<connection>scm:git:git://github.com:softlyl/mybatis-print-sql.git</connection>
+		<developerConnection>scm:git:ssh://github.com:softlyl/mybatis-print-sql.git</developerConnection>
+		<url>https://github.com/softlyl/mybatis-print-sql.git</url>
 	</scm>
 
 
@@ -149,11 +149,18 @@
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
+						<phase>package</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<show>public</show>
+					<charset>UTF-8</charset>
+					<encoding>UTF-8</encoding>
+					<docencoding>UTF-8</docencoding>
+				</configuration>
 			</plugin>
 
 		</plugins>
