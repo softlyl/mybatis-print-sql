@@ -100,7 +100,7 @@ public class SqlPluginS implements Interceptor {
                     String propertyName = paraMap.getProperty();
                     if(metaObject.hasGetter(propertyName)){
                         Object obj = metaObject.getValue(propertyName);
-                        replaceSql(sql,obj,connection);
+                        sql=replaceSql(sql,obj,connection);
                     }else if(boundSql.hasAdditionalParameter(propertyName)){//判断是否有动态参数
                         Object obj = boundSql.getAdditionalParameter(propertyName);
                         sql=replaceSql(sql,obj,connection);
@@ -129,9 +129,9 @@ public class SqlPluginS implements Interceptor {
                 value = "to_date('" + localDateTime.format(formatter) + "','YYYY-MM-DD HH24:MI:SS')";
             }else{
                 //默认mysql
-                value="date_format('" + localDateTime.format(formatter)+ "','%Y-%m-%d %H:%i:%s')";
+                value="str_to_date('" + localDateTime.format(formatter)+ "','%Y-%m-%d %H:%i:%s')";
             }
-        }else if (obj instanceof LocalDateTime) {
+        }else if (obj instanceof LocalDateTime) {//暂不根据数据库类型处理 还没见过谁用
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             value = "'" + ((LocalDateTime) obj).format(formatter) + "'";
         } else if (obj instanceof BigDecimal) {
@@ -148,7 +148,8 @@ public class SqlPluginS implements Interceptor {
             if (obj != null) {
                 value = obj.toString();
             } else {
-                value = "";
+                //null的时候，DB执行时就行null,占个位即可
+                value = "null";
             }
         }
         return sql.replaceFirst("\\?",value);
