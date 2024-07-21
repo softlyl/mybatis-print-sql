@@ -17,10 +17,17 @@
   
 2. 在springboot启动类上加上@EnablePrintSql这个注解
   
-  如下图![](https://raw.githubusercontent.com/softlyl/java-Concurrent/master/2024-07-14-15-31-46-image.png)
+  ![](https://raw.githubusercontent.com/softlyl/java-Concurrent/master/2024-07-14-15-31-46-image.png)
   
 3. 默认打印sql的日志级别是输出到debug文件中，不需要配置，如需把sql语句输入到info文件，则更改日志级别为info 需在配置文件中加入mybatis.printSql.logLevel=info，支持debug、info、error三种级别
   
-  大家看效果图
+  效果图
   
   ![](https://raw.githubusercontent.com/softlyl/java-Concurrent/master/2024-07-14-15-39-49-image.png)
+  
+# 配套视频教程地址
+  https://www.bilibili.com/video/BV1Zr421T7pu/?vd_source=ae0e96843494a3941284f3830e9a8826
+  
+# 捐赠支持 你可以请作者喝杯咖啡表示鼓励
+
+关注微信公众号：程序龙  点击【java】自己开发的mybatis打印完整sql插件 这篇文章 滑到最后 点击喜欢作者按钮
