@@ -6,6 +6,7 @@ import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.ParameterMapping;
+import org.apache.ibatis.parsing.XPathParser;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
@@ -39,21 +40,37 @@ public class SqlPluginS implements Interceptor {
 
     @Value("${mybatis.printSql.logLevel:debug}")
     private String logLevel;
+    @Value("${mybatis.printSql.zdyMapperLocations:all}")
+    private String zdyMapperLocations;
 
     private static final Logger log=LoggerFactory.getLogger(SqlPluginS.class);
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
         MetaObject metaObject = SystemMetaObject.forObject(statementHandler);
+        MappedStatement mappedStatement = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
+        Configuration configuration = mappedStatement.getConfiguration();
+        Object result=null;
+        String[] splitMls;
+        //只打印配置文件指定的mapper接口中的sql及耗时
+        if(!zdyMapperLocations.equals("all")){
+            splitMls = zdyMapperLocations.trim().split(",");
+                for (String spl : splitMls) {
+                String smid = mappedStatement.getId();
+                //当前的namespace
+                String namespace= smid.substring(0,smid.lastIndexOf("."));
+                //如果当前执行的mapper没在配置文件当中 不进行处理
+                if(!spl.equals(namespace)){
+                    return invocation.proceed();
+                }
+            }
+        }
         final Object[] args = invocation.getArgs();
         Connection connection = (Connection) args[0];
-        MappedStatement mappedStatement = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
         BoundSql boundSql = (BoundSql) metaObject.getValue("delegate.boundSql");
-        Configuration configuration = mappedStatement.getConfiguration();
-        //Object parameter= boundSql.getParameterObject();
 
         long start = System.currentTimeMillis();
-        Object result=null;
+
         try {
             result=invocation.proceed();
         } finally {

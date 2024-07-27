@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>io.github.softlyl</groupId>
 	<artifactId>mybatis-print-sql</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<description>Spring集成mybatis自定义日志级别打印拼接好的直接可在sql客户端运行的sql</description>
 	<url>https://github.com/softlyl/mybatis-print-sql</url>
 	<licenses>
@@ -58,11 +58,6 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-test</artifactId>-->
-<!--			<scope>test</scope>-->
-<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
@@ -115,16 +110,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-<!--			<plugin>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-gpg-plugin</artifactId>-->
-<!--				<version>1.6</version>-->
-<!--				<configuration>-->
-<!--					<skip>true</skip>-->
-<!--				</configuration>-->
-<!--			</plugin>-->
-
 
 			<!--     生成源文件       -->
 			<plugin>
