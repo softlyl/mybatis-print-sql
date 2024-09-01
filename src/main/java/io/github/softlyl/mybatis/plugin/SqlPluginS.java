@@ -103,6 +103,8 @@ public class SqlPluginS implements Interceptor {
             return  "";
         }
         sql=easyReadSql(sql);
+        //替换？前 把sql 中真正需要替换的？前后加个空格，最后使用正则匹配时带上边界值
+        sql=sql.replace("?"," @#& ");
         Object parameterObject = boundSql.getParameterObject();
         List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
 
@@ -169,7 +171,7 @@ public class SqlPluginS implements Interceptor {
                 value = "null";
             }
         }
-        return sql.replaceFirst("\\?",value);
+        return sql.replaceFirst("@#&",value);
     }
 
     private String easyReadSql(String sql) {

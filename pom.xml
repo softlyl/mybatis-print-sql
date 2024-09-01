@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>io.github.softlyl</groupId>
 	<artifactId>mybatis-print-sql</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	<description>Spring集成mybatis自定义日志级别打印拼接好的直接可在sql客户端运行的sql</description>
 	<url>https://github.com/softlyl/mybatis-print-sql</url>
 	<licenses>
