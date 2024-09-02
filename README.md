@@ -10,7 +10,7 @@
            <dependency>
                <groupId>io.github.softlyl</groupId>
                <artifactId>mybatis-print-sql</artifactId>
-               <version>1.0.4</version>
+               <version>1.0.5</version>
            </dependency>
    ```
 
@@ -29,6 +29,9 @@
    v1.0.4 
    
    更新内容：增加打印指定的mapper接口的sql语句
+   v1.0.5 
+   
+   更新内容：当参数值中有？时，输出完整sql有误的问题
    
    配置项说明
 
